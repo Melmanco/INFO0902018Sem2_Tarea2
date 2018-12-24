@@ -1,0 +1,8 @@
+/**
+ * 
+ */
+/**
+ * @author melman
+ *
+ */
+package chess;

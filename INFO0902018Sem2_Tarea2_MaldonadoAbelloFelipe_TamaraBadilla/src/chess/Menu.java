@@ -21,6 +21,13 @@ public class Menu extends JFrame{
 	public Menu(int posX,int posY,int tamX,int tamY) {
 		super("Menu");
 		setBounds(posX,posY,tamX,tamY);
+		setLayout(null);
+		setResizable(false);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		
+		setVisible(true);
 	}
-	
+		
+
 }

@@ -35,8 +35,8 @@ public class Game extends JFrame {
 	
 	public static void main(String[] args) {
 		
-		Menu menusito = new Menu(300,200,800,350);
 		JFrame game = new Game();
+		Menu menusito = new Menu(300,200,800,350);
 		
 	}
 		

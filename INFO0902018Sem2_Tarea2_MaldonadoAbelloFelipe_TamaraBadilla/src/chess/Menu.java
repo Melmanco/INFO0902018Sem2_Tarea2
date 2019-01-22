@@ -24,6 +24,8 @@ public class Menu extends JFrame{
 		setLayout(null);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		
 		
 		
 		setVisible(true);

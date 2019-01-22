@@ -34,9 +34,13 @@ public class Game extends JFrame {
 	}
 	
 	public static void main(String[] args) {
-		
 		JFrame game = new Game();
+		game.setEnabled(false);
 		Menu menusito = new Menu(300,200,800,350);
+		if (menusito.button.getModel().isPressed()) {
+			game.setEnabled(true);
+		}
+		
 		
 	}
 		

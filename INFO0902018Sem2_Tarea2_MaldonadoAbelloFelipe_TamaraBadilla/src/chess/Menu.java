@@ -18,20 +18,21 @@ import javax.swing.JPanel;
 
 public class Menu extends JFrame{
 	
-	JButton button = null;
+	JButton bStart = null;
+	JButton bOptions = null;
+	JButton b500x300 = null;
+	JButton b800x600 = null;
+	JButton bFullscreen = null;
+	JButton bBack = null;
 	
-	private int posX;
-	private int posY;
 	private int tamX;
 	private int tamY;
 	boolean start = false;
 	
-	public Menu(int posX,int posY,int tamX,int tamY) throws IOException {
+	public Menu(int tamX,int tamY) throws IOException {
 
 		super("Menu");
-		
-		this.posX =posX;
-		this.posY =posY;
+
 		this.tamX =tamX;
 		this.tamY =tamY;
 		
@@ -39,16 +40,32 @@ public class Menu extends JFrame{
 		setContentPane(new JLabel(new ImageIcon("./data/menuPics/chess.jpg")));
 		
 		ImageIcon image = new ImageIcon("./data/menuPics/startGame.jpg");
-	    button = new JButton(image);
+	    bStart = new JButton(image);
+		bOptions = new JButton("Opciones");
 		
-		//setBounds(posX,posY,tamX,tamY);
 		setSize(tamX,tamY);
 		setLocationRelativeTo(null);
 		setLayout(null);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		button.setBounds(500,250,200,40);
-		button.addActionListener(new ActionListener(){
+
+		b500x300 = new JButton("500x300");
+		b800x600 = new JButton("800x600");
+		bFullscreen = new JButton("Fullsc reen");
+		bBack = new JButton("Back");
+		
+		bBack.setBounds(500,400,100,40);
+		bFullscreen.setBounds(500,350,200,40);
+		b800x600.setBounds(500,300,200,40);
+		b500x300.setBounds(500,250,200,40);
+		
+		b500x300.setVisible(false);
+		b800x600.setVisible(false);
+		bFullscreen.setVisible(false);
+		bBack.setVisible(false);
+		
+		bStart.setBounds(500,250,200,40);
+		bStart.addActionListener(new ActionListener(){
 			
 			public void actionPerformed(ActionEvent e){
 				setVisible(false);
@@ -58,7 +75,63 @@ public class Menu extends JFrame{
 			}
 		});
 		
-		add(button);
+		bOptions.setBounds(500,300,200,40);
+		bOptions.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+				bStart.setVisible(false);
+				bOptions.setVisible(false);
+				
+				b500x300.setVisible(true);
+				b800x600.setVisible(true);
+				bFullscreen.setVisible(true);
+				bBack.setVisible(true);
+				
+				b500x300.addActionListener(new ActionListener(){
+					public void actionPerformed(ActionEvent e){
+
+						
+					}
+				});
+				
+				b800x600.addActionListener(new ActionListener(){
+					public void actionPerformed(ActionEvent e){
+
+						
+					}
+				});
+				bFullscreen.addActionListener(new ActionListener(){
+					public void actionPerformed(ActionEvent e){
+
+						
+					}
+				});
+				
+				bBack.addActionListener(new ActionListener(){
+					public void actionPerformed(ActionEvent e){
+						bStart.setVisible(true);
+						bOptions.setVisible(true);
+						bBack.setVisible(false);
+						
+						b500x300.setVisible(false);
+						b800x600.setVisible(false);
+						bFullscreen.setVisible(false);
+						
+					}
+				});
+				
+				
+			}
+			
+		});
+		add(bBack);
+		add(b500x300);
+		add(b800x600);
+		add(bFullscreen);
+		add(bOptions);
+		add(bStart);
 		setVisible(true);
 	}
 		

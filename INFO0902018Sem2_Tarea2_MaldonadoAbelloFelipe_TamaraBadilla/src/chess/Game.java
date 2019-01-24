@@ -38,7 +38,7 @@ public class Game extends JFrame {
 	
 	public static void main(String[] args) throws IOException {
 
-		Menu menusito = new Menu(300,50,800,600);
+		Menu menusito = new Menu(800,600);
 		menusito.addWindowListener(new WindowAdapter() {
 			public void windowClosed(WindowEvent e) {
 		        if (menusito.start) {
@@ -47,7 +47,7 @@ public class Game extends JFrame {
 			}
 		});
 	
-		
+		//Usar gridbaglayout para agrandar todo proporcionalmente
 	}
 		
 }

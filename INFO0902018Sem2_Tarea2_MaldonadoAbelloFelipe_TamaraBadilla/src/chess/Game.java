@@ -35,6 +35,23 @@ public class Game extends JFrame {
 		this.setVisible(true);
 		
 	}
+	public Game(Dimension dimension) {
+		super();
+		
+		layeredPane = new JLayeredPane();
+		this.getContentPane().add(layeredPane);
+		layeredPane.setPreferredSize(dimension);
+
+		Board board = new Board(dimension, layeredPane);
+		layeredPane.add(board, JLayeredPane.DEFAULT_LAYER);
+		
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		this.pack();
+		this.setResizable(false);
+		this.setLocationRelativeTo(null);
+		this.setVisible(true);
+		
+	}
 	
 	public static void main(String[] args) throws IOException {
 
@@ -42,7 +59,7 @@ public class Game extends JFrame {
 		menusito.addWindowListener(new WindowAdapter() {
 			public void windowClosed(WindowEvent e) {
 		        if (menusito.start) {
-					JFrame game = new Game();
+					JFrame game = new Game(menusito.dimension);
 		        }
 			}
 		});

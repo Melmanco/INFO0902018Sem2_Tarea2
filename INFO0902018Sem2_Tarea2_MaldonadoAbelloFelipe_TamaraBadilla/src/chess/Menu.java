@@ -1,5 +1,6 @@
 package chess;
 
+import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,24 +11,31 @@ import java.awt.event.WindowEvent;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JToggleButton;
 
 public class Menu extends JFrame{
 	
 	JButton bStart = null;
 	JButton bOptions = null;
-	JButton b500x300 = null;
-	JButton b800x600 = null;
-	JButton bFullscreen = null;
 	JButton bBack = null;
+	JButton bQuit = null;
+	JToggleButton b800x800 = null;
+	JToggleButton b1000x1000 = null;
+	JToggleButton bSetDefault = null;
+	
+	ButtonGroup sizes = null;
 	
 	private int tamX;
 	private int tamY;
 	boolean start = false;
+	
+	Dimension dimension;
 	
 	public Menu(int tamX,int tamY) throws IOException {
 
@@ -36,12 +44,24 @@ public class Menu extends JFrame{
 		this.tamX =tamX;
 		this.tamY =tamY;
 		
+		dimension = new Dimension(600,600);
 		//setUndecorated(true);
 		setContentPane(new JLabel(new ImageIcon("./data/menuPics/chess.jpg")));
 		
-		ImageIcon image = new ImageIcon("./data/menuPics/startGame.jpg");
-	    bStart = new JButton(image);
-		bOptions = new JButton("Opciones");
+		ImageIcon iStartGame = new ImageIcon("./data/menuPics/startGame2.jpg");
+		ImageIcon i1000x1000U = new ImageIcon("./data/menuPics/1000x1000.jpg");
+		ImageIcon i800x800U = new ImageIcon("./data/menuPics/800x800.jpg");
+		ImageIcon iDefaultSizeU = new ImageIcon("./data/menuPics/defaultSizeButton.jpg");
+		ImageIcon ioptionsButton = new ImageIcon("./data/menuPics/optionsButton.jpg");
+		ImageIcon iQuitButton = new ImageIcon("./data/menuPics/quitButton.jpg");
+		
+		ImageIcon i1000x1000P = new ImageIcon("./data/menuPics/pressed1000x1000.jpg");
+		ImageIcon i800x800P = new ImageIcon("./data/menuPics/pressed800x800.jpg");
+		ImageIcon iDefaultSizeP = new ImageIcon("./data/menuPics/presseddefaultSizeButton.jpg");
+		
+		
+	    bStart = new JButton(iStartGame);
+		bOptions = new JButton(ioptionsButton);
 		
 		setSize(tamX,tamY);
 		setLocationRelativeTo(null);
@@ -49,22 +69,50 @@ public class Menu extends JFrame{
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		b500x300 = new JButton("500x300");
-		b800x600 = new JButton("800x600");
-		bFullscreen = new JButton("Fullsc reen");
-		bBack = new JButton("Back");
+		ImageIcon iBack = new ImageIcon("./data/menuPics/backButton.png");
+		
+		b800x800 = new JToggleButton();		
+		b1000x1000 = new JToggleButton();
+		bSetDefault = new JToggleButton();
+		
+		bSetDefault.setIcon(iDefaultSizeP);
+				
+		sizes = new ButtonGroup();
+		
+		bSetDefault.setSelected(true);
+		
+		sizes.add(b800x800);
+		sizes.add(b1000x1000);
+		sizes.add(bSetDefault);
+		
+		bBack = new JButton(iBack);
+		bQuit = new JButton(iQuitButton);
+		
+		bBack.setOpaque(false);
+		bBack.setContentAreaFilled(false);
+		bBack.setBorderPainted(false);
 		
 		bBack.setBounds(500,400,100,40);
-		bFullscreen.setBounds(500,350,200,40);
-		b800x600.setBounds(500,300,200,40);
-		b500x300.setBounds(500,250,200,40);
+		bSetDefault.setBounds(500,350,200,40);
+		b1000x1000.setBounds(500,300,200,40);
+		b800x800.setBounds(500,250,200,40);
 		
-		b500x300.setVisible(false);
-		b800x600.setVisible(false);
-		bFullscreen.setVisible(false);
+		b800x800.setVisible(false);
+		b1000x1000.setVisible(false);
+		bSetDefault.setVisible(false);
 		bBack.setVisible(false);
 		
 		bStart.setBounds(500,250,200,40);
+		bQuit.setBounds(500,300,200,40);
+		bQuit.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				setVisible(false);
+				dispose();
+			}
+			
+		});
 		bStart.addActionListener(new ActionListener(){
 			
 			public void actionPerformed(ActionEvent e){
@@ -76,35 +124,38 @@ public class Menu extends JFrame{
 		});
 		
 		bOptions.setBounds(500,300,200,40);
+		bQuit.setBounds(500,350,200,40);
+		
 		bOptions.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				
+								
 				bStart.setVisible(false);
 				bOptions.setVisible(false);
+				bQuit.setVisible(false);
 				
-				b500x300.setVisible(true);
-				b800x600.setVisible(true);
-				bFullscreen.setVisible(true);
+				b800x800.setVisible(true);
+				b1000x1000.setVisible(true);
+				bSetDefault.setVisible(true);
 				bBack.setVisible(true);
 				
-				b500x300.addActionListener(new ActionListener(){
+				b800x800.addActionListener(new ActionListener(){
 					public void actionPerformed(ActionEvent e){
-
+						
+						dimension = new Dimension(800,800);
 						
 					}
 				});
-				
-				b800x600.addActionListener(new ActionListener(){
+				b1000x1000.addActionListener(new ActionListener(){
 					public void actionPerformed(ActionEvent e){
-
+						dimension = new Dimension(1000,1000);
 						
 					}
 				});
-				bFullscreen.addActionListener(new ActionListener(){
+				bSetDefault.addActionListener(new ActionListener(){
 					public void actionPerformed(ActionEvent e){
-
+						dimension = new Dimension(600,600);
 						
 					}
 				});
@@ -114,10 +165,11 @@ public class Menu extends JFrame{
 						bStart.setVisible(true);
 						bOptions.setVisible(true);
 						bBack.setVisible(false);
+						bQuit.setVisible(true);
 						
-						b500x300.setVisible(false);
-						b800x600.setVisible(false);
-						bFullscreen.setVisible(false);
+						b800x800.setVisible(false);
+						b1000x1000.setVisible(false);
+						bSetDefault.setVisible(false);
 						
 					}
 				});
@@ -126,14 +178,14 @@ public class Menu extends JFrame{
 			}
 			
 		});
+		add(bQuit);
+		add(bSetDefault);
 		add(bBack);
-		add(b500x300);
-		add(b800x600);
-		add(bFullscreen);
+		add(b800x800);
+		add(b1000x1000);
 		add(bOptions);
 		add(bStart);
 		setVisible(true);
 	}
 		
-
 }

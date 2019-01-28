@@ -8,6 +8,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.FileInputStream;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -49,16 +50,8 @@ public class Menu extends JFrame{
 		setContentPane(new JLabel(new ImageIcon("./data/menuPics/chess.jpg")));
 		
 		ImageIcon iStartGame = new ImageIcon("./data/menuPics/startGame2.jpg");
-		ImageIcon i1000x1000U = new ImageIcon("./data/menuPics/1000x1000.jpg");
-		ImageIcon i800x800U = new ImageIcon("./data/menuPics/800x800.jpg");
-		ImageIcon iDefaultSizeU = new ImageIcon("./data/menuPics/defaultSizeButton.jpg");
 		ImageIcon ioptionsButton = new ImageIcon("./data/menuPics/optionsButton.jpg");
 		ImageIcon iQuitButton = new ImageIcon("./data/menuPics/quitButton.jpg");
-		
-		ImageIcon i1000x1000P = new ImageIcon("./data/menuPics/pressed1000x1000.jpg");
-		ImageIcon i800x800P = new ImageIcon("./data/menuPics/pressed800x800.jpg");
-		ImageIcon iDefaultSizeP = new ImageIcon("./data/menuPics/presseddefaultSizeButton.jpg");
-		
 		
 	    bStart = new JButton(iStartGame);
 		bOptions = new JButton(ioptionsButton);
@@ -73,13 +66,18 @@ public class Menu extends JFrame{
 		
 		b800x800 = new JToggleButton();		
 		b1000x1000 = new JToggleButton();
-		bSetDefault = new JToggleButton();
-		
-		bSetDefault.setIcon(iDefaultSizeP);
+		bSetDefault = new JToggleButton("blank",true);
 				
 		sizes = new ButtonGroup();
 		
-		bSetDefault.setSelected(true);
+		b800x800.setIcon(new ImageIcon(ImageIO.read(new FileInputStream("./data/menuPics/800X800.jpg"))));	
+		b800x800.setSelectedIcon(new ImageIcon(ImageIO.read(new FileInputStream("./data/menuPics/pressed800X800.jpg"))));
+	
+		b1000x1000.setIcon(new ImageIcon(ImageIO.read(new FileInputStream("./data/menuPics/1000X1000.jpg"))));	
+		b1000x1000.setSelectedIcon(new ImageIcon(ImageIO.read(new FileInputStream("./data/menuPics/pressed1000X1000.jpg"))));
+		
+		bSetDefault.setIcon(new ImageIcon(ImageIO.read(new FileInputStream("./data/menuPics/defaulSizeButton.jpg"))));	
+		bSetDefault.setSelectedIcon(new ImageIcon(ImageIO.read(new FileInputStream("./data/menuPics/presseddefaulSizeButton.jpg"))));
 		
 		sizes.add(b800x800);
 		sizes.add(b1000x1000);
@@ -142,7 +140,6 @@ public class Menu extends JFrame{
 				
 				b800x800.addActionListener(new ActionListener(){
 					public void actionPerformed(ActionEvent e){
-						
 						dimension = new Dimension(800,800);
 						
 					}

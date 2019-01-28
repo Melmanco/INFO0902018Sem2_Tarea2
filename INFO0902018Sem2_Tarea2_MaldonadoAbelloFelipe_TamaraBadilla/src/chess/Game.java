@@ -24,6 +24,7 @@ public class Game extends JFrame implements MouseListener, MouseMotionListener{
 	private JPanel initialSquare = null;
 	private int xAdjustment;
 	private int yAdjustment;
+	private Color turnColor;
 	
 	public Game() {
 		
@@ -35,6 +36,8 @@ public class Game extends JFrame implements MouseListener, MouseMotionListener{
 		
 		board = new Board(DEFAULT_SIZE);
 		layeredPane.add(board, JLayeredPane.DEFAULT_LAYER);
+		
+		turnColor = Color.white;
 		
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		pack();
@@ -48,6 +51,12 @@ public class Game extends JFrame implements MouseListener, MouseMotionListener{
 
 		if (square.getBackground() != Color.white && square.getBackground() != Color.black) return true;
 		return false;
+		
+	}
+	
+	public void changeTurn() {
+		
+		turnColor = turnColor == Color.white ? Color.black : Color.white;
 		
 	}
 	
@@ -87,7 +96,7 @@ public class Game extends JFrame implements MouseListener, MouseMotionListener{
 		yAdjustment = parentLocation.y - e.getY();
 		
 		piece = (Piece)c;
-		piece.checkMoves();
+		if (piece.getColor() == turnColor) piece.checkMoves();
 		piece.setLocation(parentLocation.x,parentLocation.y);
 		piece.setSize(piece.getWidth(),piece.getHeight());
 		
@@ -104,22 +113,19 @@ public class Game extends JFrame implements MouseListener, MouseMotionListener{
 		
 		Component c = board.findComponentAt(e.getX(),e.getY());
 		
-		if (c instanceof JLabel) {
+		Container parent = null;
 		
-			Container parent = c.getParent();
-			if (isValidMove((JPanel) parent)) {
-				parent.remove(0);
-				parent.add(piece);
-			}
-			else initialSquare.add(piece);
+		if (c instanceof JLabel) parent = c.getParent();
+		else parent = (Container)c;
+
+		if	(isValidMove((JPanel) parent)) {
 			
-		}else {
+			if (c instanceof JLabel) parent.remove(0);
+			parent.add(piece);
+			changeTurn();
 			
-			Container parent = (Container)c;
-			if (isValidMove((JPanel) parent)) parent.add(piece);
-			else initialSquare.add(piece);
-				
-		}
+		}else initialSquare.add(piece);
+			
 		board.setBoardColor();
 		piece.setVisible(true);
 	}

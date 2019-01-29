@@ -8,12 +8,29 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
+/**
+ * 
+ * Esta clase es el tablero y se encarga de la organización de los paneles y las piezas dentro del tablero.
+ * 
+ * @author Felipe Maldonado Abello
+ *
+ */
+
 public class Board extends JPanel{
 
 	private JPanel panel = null;
 	private JPanel square = null;
 	private Piece piece = null;
 	private ArrayList<JPanel> squareList = new ArrayList<JPanel>();
+	
+	/**
+	 * 
+	 * El constructor configura el layout, las dimensiones del tablero,
+	 * contiene todos los cuadrados y los pinta,
+	 * y agrega las piezas a su correspondiente cuadrado inicial.
+	 * 
+	 * @param size tamaño del tablero que viene desde la configuración del menú.
+	 */
 	
 	public Board(Dimension size) {
 		
@@ -34,6 +51,12 @@ public class Board extends JPanel{
 
 	}
 
+	/**
+	 * 
+	 * Añade todas las piezas a su cuadrado correspondiente.
+	 * 
+	 */
+	
 	public void addPieces() {
 		
 		piece = new Rook("./data/piezas/piezas blancas/torre.png",Color.white);
@@ -121,6 +144,12 @@ public class Board extends JPanel{
 		}
 		
 	}
+	
+	/**
+	 * 
+	 * Pinta los cuadrados del tablero en su color original.
+	 * 
+	 */
 
 	public void setBoardColor() {
 		
@@ -142,8 +171,4 @@ public class Board extends JPanel{
 		return squareList;
 	}
 
-	public void setSquareList(ArrayList<JPanel> squareList) {
-		this.squareList = squareList;
-	}
-	
 }

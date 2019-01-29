@@ -53,12 +53,12 @@ public class Menu extends JFrame{
 	
 	/**
 	 * 
-	 * @throws IOException
-	 * 
 	 * En el constructor, además de inicializarse los atributos, como 
 	 * las dimensiones de la ventana, las imagenes de los botones, la
 	 * imagen de la ventana en sí, etc. también se les da el funcionamiento
 	 * y se muestran en pantalla.
+	 * 
+	 * @throws IOException si no encuentra algún archivo.
 	 * 
 	 */
 	public Menu() throws IOException {

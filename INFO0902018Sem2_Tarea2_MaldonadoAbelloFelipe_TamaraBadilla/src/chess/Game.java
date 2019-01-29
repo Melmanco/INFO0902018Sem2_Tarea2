@@ -10,6 +10,10 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.IOException;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
@@ -17,7 +21,6 @@ import javax.swing.JPanel;
 
 public class Game extends JFrame implements MouseListener, MouseMotionListener{
 
-	private Dimension DEFAULT_SIZE = new Dimension(600, 600);
 	private JLayeredPane layeredPane = null;
 	private Board board = null;
 	private Piece piece = null;
@@ -26,15 +29,15 @@ public class Game extends JFrame implements MouseListener, MouseMotionListener{
 	private int yAdjustment;
 	private Color turnColor;
 	
-	public Game() {
+	public Game(Dimension dimension) {
 		
 		layeredPane = new JLayeredPane();
 		getContentPane().add(layeredPane);
-		layeredPane.setPreferredSize(DEFAULT_SIZE);
+		layeredPane.setPreferredSize(dimension);
 		layeredPane.addMouseListener(this);
 		layeredPane.addMouseMotionListener(this);
 		
-		board = new Board(DEFAULT_SIZE);
+		board = new Board(dimension);
 		layeredPane.add(board, JLayeredPane.DEFAULT_LAYER);
 		
 		turnColor = Color.white;
@@ -46,7 +49,7 @@ public class Game extends JFrame implements MouseListener, MouseMotionListener{
 		setVisible(true);
 				
 	}
-	
+
 	public boolean isValidMove(JPanel square) {
 
 		if (square.getBackground() != Color.white && square.getBackground() != Color.black) return true;
@@ -142,8 +145,10 @@ public class Game extends JFrame implements MouseListener, MouseMotionListener{
 		
 	}
 	
-	public static void main(String[] args) {
-		Game game = new Game();
+	public static void main(String[] args) throws IOException {
+
+		Menu menu = new Menu();
+	
 	}
 
 }

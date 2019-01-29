@@ -20,6 +20,19 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 
+/**
+ * 
+ * @author Tamara Badilla
+ *
+ *<h> Clase Menu </h>
+ *
+ *
+ *La clase Menu se encarga de crear un menu extendido de JFrame, que 
+ *controla el tamaño de la ventana de juego, además de dar la opcion
+ *de salir o iniciar el juego.
+ * 
+ * 
+ */
 public class Menu extends JFrame{
 	
 	JButton bStart = null;
@@ -38,6 +51,16 @@ public class Menu extends JFrame{
 	
 	Dimension dimension;
 	
+	/**
+	 * 
+	 * @throws IOException
+	 * 
+	 * En el constructor, además de inicializarse los atributos, como 
+	 * las dimensiones de la ventana, las imagenes de los botones, la
+	 * imagen de la ventana en sí, etc. también se les da el funcionamiento
+	 * y se muestran en pantalla.
+	 * 
+	 */
 	public Menu() throws IOException {
 
 		super("Menu");
